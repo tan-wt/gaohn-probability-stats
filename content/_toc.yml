@@ -9,7 +9,9 @@ parts:
     - file: 02_probability/02_probability.md
   - caption: Chapter 3. Discrete Random Variables
     chapters:
-    - file: 03_discrete_random_variables/03_discrete_random_variables.md
+    - file: 03_discrete_random_variables/03_01_discrete_random_variables.md
+    - file: 03_discrete_random_variables/03_02_probability_mass_function.md
+    - file: 03_discrete_random_variables/03_03_cumulative_distribution_function.md
 
 
 

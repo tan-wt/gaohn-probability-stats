@@ -14,7 +14,7 @@ only_build_toc_files        : true  # Only build the table of contents files, an
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: 'off' # force # 'off'
+  execute_notebooks: 'cache' # force # 'off'
 
 
 # MyST Configuration
@@ -29,18 +29,9 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
-sphinx:
-  extra_extensions:
-    - sphinx_inline_tabs # https://jupyterbook.org/en/stable/advanced/sphinx.html
-    - sphinx_proof # https://jupyterbook.org/en/stable/content/proof.html
-    
-  config:
-    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-    bibtex_reference_style: author_year # https://jupyterbook.org/en/stable/tutorials/references.html#tutorials-references
-
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/reigHns92/ml_blog  # Online location of your book
+  url: https://github.com/gao-hongnan/gaohn-probability-stats  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
@@ -60,4 +51,41 @@ launch_buttons:
 parse:
   myst_url_schemes: [mailto, http, https]
   myst_heading_anchors: 3
+
+sphinx:
+  extra_extensions:
+    - sphinx_inline_tabs # https://jupyterbook.org/en/stable/advanced/sphinx.html
+    - sphinx_proof # https://jupyterbook.org/en/stable/content/proof.html
+    
+  config:
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    bibtex_reference_style: author_year # https://jupyterbook.org/en/stable/tutorials/references.html#tutorials-references
+    mathjax3_config:
+      tex:
+        macros:
+          "st": "\\mid"
+          "S": "\\Omega"
+          "P": "\\mathbb{P}"
+          "R": "\\mathbb{R}"
+          "v": "\\mathbf{v}"
+          "a": "\\mathbf{a}"
+          "b": "\\mathbf{b}"
+          "c": "\\mathbf{c}"
+          "u": "\\mathbf{u}"
+          "w": "\\mathbf{w}"
+          "x": "\\mathbf{x}"
+          "y": "\\mathbf{y}"
+          "z": "\\mathbf{z}"
+          "0": "\\mathbf{0}"
+          "1": "\\mathbf{1}"
+          "A": "\\mathbf{A}"
+          "B": "\\mathbf{B}"
+          "C": "\\mathbf{C}"
+          "E": "\\mathcal{F}"
+          "lset": "\\left\\{"
+          "rset": "\\right\\}"
+          "lsq": "\\left["
+          "rsq": "\\right]"
+          "pmf": "p_X"
+          "cdf": "F_X"
 
