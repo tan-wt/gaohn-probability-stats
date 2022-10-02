@@ -140,6 +140,7 @@ where $\xi_i \in \R$ for all $i$. Then, the CDF $\cdf$ of $X$ satisfies the foll
     $$
     \cdf(\xi) = \lim_{\xi' \to \xi} \cdf(\xi')
     $$
+````
 
 ## PMF and CDF Conversion
 
@@ -161,7 +162,7 @@ $\infty$, then the CDF of $X$ can be obtained from the PMF by
 
 $$
 \cdf(k) = \cdf(k) - \cdf(k-1)
-$$ (eq:pmf_cdf_1)
+$$ (eq:pmf_cdf_2)
 ````
 
 

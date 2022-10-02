@@ -1,30 +1,3 @@
-$$
-\newcommand{\st}{\mid}
-\newcommand{\S}{\Omega}
-\newcommand{\P}{\mathbb{P}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\v}{\mathbf{v}}
-\newcommand{\a}{\mathbf{a}}
-\newcommand{\b}{\mathbf{b}}
-\newcommand{\c}{\mathbf{c}}
-\newcommand{\u}{\mathbf{u}}
-\newcommand{\w}{\mathbf{w}}
-\newcommand{\x}{\mathbf{x}}
-\newcommand{\y}{\mathbf{y}}
-\newcommand{\z}{\mathbf{z}}
-\newcommand{\0}{\mathbf{0}}
-\newcommand{\1}{\mathbf{1}}
-\newcommand{\A}{\mathbf{A}}
-\newcommand{\B}{\mathbf{B}}
-\newcommand{\C}{\mathbf{C}}
-\newcommand{\E}{\mathcal{F}}
-\newcommand{\lset}{\left\{}
-\newcommand{\rset}{\right\}}
-\newcommand{\lsq}{\left[}
-\newcommand{\rsq}{\right]}
-\newcommand{\pmf}{p_X}
-$$
-
 # Probability
 
 Most definitions and theorems below are cited from {cite}`chan_2021`.
@@ -99,8 +72,6 @@ $$
 $$
 
 ````
-
-
 
 ### Probability Law is a Measure
 
