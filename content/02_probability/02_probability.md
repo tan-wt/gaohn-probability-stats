@@ -63,6 +63,8 @@ We will go through the notations in the following sections.
 
 A **sample space** $\Omega$ is a set of all possible outcomes of an experiment.
 We denote $\xi \in \Omega$ as an *outcome*. 
+
+Note that a **sample space** can be **uncountable**.
 ````
 
 

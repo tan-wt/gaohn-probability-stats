@@ -2,12 +2,9 @@ jupyter-book
 matplotlib
 numpy
 ghp-import
-matplotlib
-numpy
-ghp-import
-matplotlib
-numpy
-ghp-import
+black == 21.9b0
+click == 7.1.2
+pylint == 2.7.4
 cookiecutter==2.1.1
 jupyter-book==0.13.1
 sphinx-inline-tabs==2021.3.28b7
