@@ -16,7 +16,7 @@ parts:
     - file: 02_probability/0206_bayes_theorem.md
     - file: 02_probability/summary.md
   - caption: Chapter 3. Discrete Random Variables
-    chapters:
+    chapters: 
     - file: 03_discrete_random_variables/0301_random_variables.md
     - file: 03_discrete_random_variables/0302_discrete_random_variables.md
     - file: 03_discrete_random_variables/0303_probability_mass_function.md

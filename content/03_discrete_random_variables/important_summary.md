@@ -1,10 +1,12 @@
 # Important
 
-This section is a placeholder as need time to digest.
+This section is a placeholder as need time to digest. Later on we can put the content below back to their respective sections.
 
 - Revisit the idea of the histogram, even a section during PMF is good as a refresher!
 - Try to think about how to write PMF as an ideal histogram into my notes, especially from the machine learning perspective.
 - Early mention of empirical CDF vs CDF, empirical histogram vs PMF
+
+
   
 ## Rough notes
 
