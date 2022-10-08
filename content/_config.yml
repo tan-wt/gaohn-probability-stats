@@ -88,4 +88,5 @@ sphinx:
           "rsq": "\\right]"
           "pmf": "p_X"
           "cdf": "F_X"
+          "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
 
