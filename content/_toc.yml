@@ -7,6 +7,7 @@ parts:
   - caption: Chapter 1. Mathematical Preliminaries
     chapters:
       - file: 01_mathematical_preliminaries/01_combinatorics.md
+      - file: 01_mathematical_preliminaries/exercises.ipynb
   - caption: Chapter 2. Probability
     chapters:
     - file: 02_probability/0202_probability_space.md
@@ -15,7 +16,6 @@ parts:
     - file: 02_probability/0205_independence.md
     - file: 02_probability/0206_bayes_theorem.md
     - file: 02_probability/summary.md
-    - file: 02_probability/exercises.ipynb
   - caption: Chapter 3. Discrete Random Variables
     chapters: 
     - file: 03_discrete_random_variables/0301_random_variables.md
