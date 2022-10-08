@@ -19,3 +19,9 @@ This section is a placeholder as need time to digest. Later on we can put the co
 - Prof drew a very important diagram towards the end of lecture 10, on how histograms tend to their PMF as a number of experiments tend to infinity, and how each histogram mean (sample mean) tends to its PMF's expectation (population mean). I believe this part is very very important and needs to be bookmarked in my notes and treated as a header. This is because he mentioned how sample mean is random but population mean (expectation) is deterministic, which implies histograms are random (i.e randomly drawn samples from the population while PMF is deterministic (?)).
 
 ### Expectation is deterministic
+
+### Variance
+
+- In lecture video around 28 minute onwards prof gave a good intuition of visualizing variance.
+- Intuition why why DC shift dont shift var.
+- Min 45 onwards PMF vs Histogram same holds for sample variance vs population variance etc.
