@@ -23,5 +23,3 @@ parts:
     - file: 03_discrete_random_variables/0303_probability_mass_function.md
     - file: 03_discrete_random_variables/0304_cumulative_distribution_function.md
 
-
-

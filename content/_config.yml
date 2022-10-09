@@ -60,6 +60,7 @@ sphinx:
   config:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     bibtex_reference_style: author_year # https://jupyterbook.org/en/stable/tutorials/references.html#tutorials-references
+    # suppress_warnings: [bibtex.duplicate_label] # https://sphinxcontrib-bibtex.readthedocs.io/en/latest/usage.html#section-local-bibliographies
     mathjax3_config:
       tex:
         macros:
