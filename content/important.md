@@ -53,11 +53,26 @@ So we secretly know the true PMF of the above distribution is actually simply
 
 $$
 \begin{align}
-\P(X=x) = \frac{100}{1000} = \frac{1}{10} \quad \forall x \in \{1, \ldots, 100\}
+\P(X=x) = \frac{10}{1000} = \frac{1}{10} \quad \forall x \in \{1, \ldots, 100\}
 \end{align}
 $$
 
-since it is equally likely to get any person with height 1-100 cm over 1000 people. Recall the 
+$$
+\begin{align}
+\P(X=x) = \begin{cases}
+\frac{1}{10} \text{ if } x=1 \\
+\frac{1}{10} \text{ if } x=2 \\
+\frac{1}{10} \text{ if } x=3 \\
+\vdots \\
+\frac{1}{10} \text{ if } x=100 \\
+\end{cases}
+\end{align}
+$$
+
+since it is equally likely to get any person with height 1-100 cm over 1000 people. Note
+that for each height, we have exactly 10 people.
+
+Recall the 
 example 
 
 $$
