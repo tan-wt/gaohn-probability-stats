@@ -15,23 +15,36 @@ def seed_all(seed: int = 1992) -> None:
     random.seed(seed)  #  set fixed value for python built-in pseudo-random generator
 
 
-def plot_discrete_pmf(low, high, title, stats_dist=None, lw=20):
+def plot_discrete_pmf(low, high, title, stats_dist=None, lw=20, **kwargs) -> None:
+    """Plot the PMF of a discrete distribution.
 
-    if stats_dist is None:
-        discrete = stats.randint(low, high + 1)
+    Args:
+        low (int): Lower bound of the distribution.
+        high (int): Upper bound of the distribution.
+        title (str): Title of the plot.
+        stats_dist (scipy.stats.rv_discrete, optional): A scipy discrete distribution. Defaults to None.
+        lw (int, optional): Line width of the plot. Defaults to 20.
+        **kwargs: Keyword arguments to pass to the stats_dist.pmf function.
+    """
+    x = np.arange(low, high + 1)
+    if stats_dist:
+        y = stats_dist.pmf(x, **kwargs)
     else:
-        discrete = stats_dist
+        y = np.ones(len(x)) / len(x)
 
-    x = np.arange(low - 1.0, high + 1.0)
-
-    fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-
-    ax.set_xlim(low - 1, high + 1)
-    ax.set_xlabel("Outcomes", fontsize=16)
-    ax.set_ylabel("Probability Mass Function (pmf)", fontsize=16)
-    ax.vlines(x, 0, discrete.pmf(x), colors="darkred", lw=lw, alpha=0.6)
-    ax.set_ylim(0, np.max(discrete.pmf(x)) + 0.03)
-
-    plt.title(title, fontsize=20)
-
+    plt.stem(
+        x,
+        y,
+        linefmt="C0-",
+        markerfmt="C0o",
+        use_line_collection=True,
+        basefmt="C0-",
+        label="PMF",
+    )
+    plt.title(title)
+    plt.xlabel("x")
+    plt.ylabel("P(X=x)")
+    plt.xlim(low - 1, high + 1)
+    plt.xticks(np.arange(low, high + 1, 1))
+    plt.legend()
     plt.show()

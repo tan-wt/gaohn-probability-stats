@@ -65,6 +65,7 @@ sphinx:
       tex:
         macros:
           "st": "\\mid"
+          "mod": "\\mid"
           "S": "\\Omega"
           "P": "\\mathbb{P}"
           "R": "\\mathbb{R}"
@@ -88,7 +89,11 @@ sphinx:
           "rset": "\\right\\}"
           "lsq": "\\left["
           "rsq": "\\right]"
+          "lpar": "\\left("
+          "rpar": "\\right)"
           "pmf": "p_X"
           "cdf": "F_X"
           "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
+          "var": "\\operatorname{Var}"
+          "std": "\\operatorname{Std}"
 
