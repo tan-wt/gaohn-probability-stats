@@ -67,6 +67,7 @@ sphinx:
           "st": "\\mid"
           "mod": "\\mid"
           "S": "\\Omega"
+          "s": "\\omega"
           "P": "\\mathbb{P}"
           "R": "\\mathbb{R}"
           "exp": "\\mathbb{E}"
@@ -96,4 +97,5 @@ sphinx:
           "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
           "var": "\\operatorname{Var}"
           "std": "\\operatorname{Std}"
+          "bern": "\\operatorname{Bernoilli}"
 

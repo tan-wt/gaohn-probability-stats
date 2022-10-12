@@ -1,7 +1,6 @@
 import scipy.stats as stats
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 import random
 from typing import *
 
@@ -10,7 +9,7 @@ def seed_all(seed: int = 1992) -> None:
     """Seed all random number generators."""
     print(f"Using Seed Number {seed}")
 
-    os.environ["PYTHONHASHSEED"] = str(seed)  # set PYTHONHASHSEED env var
+    # os.environ["PYTHONHASHSEED"] = str(seed)  # set PYTHONHASHSEED env var
     np.random.seed(seed)  # for numpy pseudo-random generator
     random.seed(seed)  #  set fixed value for python built-in pseudo-random generator
 

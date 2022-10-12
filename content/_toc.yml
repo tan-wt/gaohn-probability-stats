@@ -24,6 +24,7 @@ parts:
     - file: 03_discrete_random_variables/0304_cumulative_distribution_function.md
     - file: 03_discrete_random_variables/0305_expectation.md
     - file: 03_discrete_random_variables/0306_variance_and_moments.md
-    - file: tmp.md
+    - file: 03_discrete_random_variables/0307_discrete_uniform_distribution.ipynb
+    #- file: 03_discrete_random_variables/0308_bernoulli_distribution.ipynb
     - file: important.md
 
