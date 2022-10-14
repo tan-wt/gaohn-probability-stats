@@ -10,8 +10,22 @@ def seed_all(seed: int = 1992) -> None:
     print(f"Using Seed Number {seed}")
 
     # os.environ["PYTHONHASHSEED"] = str(seed)  # set PYTHONHASHSEED env var
-    np.random.seed(seed)  # for numpy pseudo-random generator
-    random.seed(seed)  #  set fixed value for python built-in pseudo-random generator
+    np.random.seed(seed)  # numpy pseudo-random generator
+    random.seed(seed)  # built-in pseudo-random generator
+
+
+def true_pmf(x: float, population: np.ndarray) -> float:
+    """PMF of the true population: map X(\S) to a probability.
+
+    Note:
+        The PMF is completely determined if we know the true distribution.
+    """
+    return np.sum(population == x) / len(population)
+
+
+def empirical_pmf(x: float, sample: np.ndarray):
+    """Empirical distribution of the sample."""
+    return np.sum(sample == x) / len(sample)
 
 
 def plot_discrete_pmf(low, high, title, stats_dist=None, lw=20, **kwargs) -> None:
