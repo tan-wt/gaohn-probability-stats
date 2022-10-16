@@ -17,7 +17,7 @@ This is the documentation for the course [Introduction to Probability for Data S
 ### Installation
 
 ```bash
-~/gaohn        $ git clone https://github.com/gao-hongnan/gaohn-probability-stats.git gaohn_probability_stats
+~/gaohn        $ git clone https://github.com/gao-hongnan/gaohn-probability-stats.git gaohn-probability-stats
 ~/gaohn        $ cd gaohn-probability-stats
 ~/gaohn        $ python -m venv <venv_name> && <venv_name>\Scripts\activate 
 ~/gaohn (venv) $ python -m pip install --upgrade pip setuptools wheel
