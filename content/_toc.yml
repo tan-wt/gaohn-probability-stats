@@ -27,5 +27,6 @@ parts:
     - file: 03_discrete_random_variables/0307_discrete_uniform_distribution.ipynb
     - file: 03_discrete_random_variables/0308_bernoulli_distribution.ipynb
     - file: 03_discrete_random_variables/iid.md
+    - file: 03_discrete_random_variables/0309_binomial_distribution.ipynb
     - file: important.md
 

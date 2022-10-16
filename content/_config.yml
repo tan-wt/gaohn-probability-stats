@@ -98,4 +98,5 @@ sphinx:
           "var": "\\operatorname{Var}"
           "std": "\\operatorname{Std}"
           "bern": "\\operatorname{Bernoilli}"
+          "binomial": "\\operatorname{Binomial}"
 
