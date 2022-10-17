@@ -24,12 +24,6 @@ Some important stuff here which I need to remember and yet to be able to formali
 ## Temp Writings
 
 
-
-## Conditions
-
-
-
-
 ## Important Topics
 
 See {doc}`./03_discrete_random_variables/0307_discrete_uniform_distribution` for my whole setup.

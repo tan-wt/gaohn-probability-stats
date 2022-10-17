@@ -99,4 +99,6 @@ sphinx:
           "std": "\\operatorname{Std}"
           "bern": "\\operatorname{Bernoilli}"
           "binomial": "\\operatorname{Binomial}"
+          "geometric": "\\operatorname{Geometric}"
+          "poisson": "\\operatorname{Poisson}"
 
