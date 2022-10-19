@@ -101,4 +101,5 @@ sphinx:
           "binomial": "\\operatorname{Binomial}"
           "geometric": "\\operatorname{Geometric}"
           "poisson": "\\operatorname{Poisson}"
+          "iid": "\\textbf{i.i.d.}"
 
