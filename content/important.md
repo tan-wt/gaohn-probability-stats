@@ -116,3 +116,9 @@ Now we randomly pick 10 people from the true population, then we can plot a hist
 says 3 people have height 175 cm, 2 people have height 180 cm, and so on. This is the empirical distribution, and it is not the true PMF,
 and in our case we have $\dfrac{3}{10}$ probability that a person has 175cm $\P(X=175) = \dfrac{3}{10}$. But note carefully
 here is **empirical** distribution and is non-deterministic.
+
+
+## Questions Asked
+
+- https://stats.stackexchange.com/questions/590792/empirical-histogram-and-pmf
+- https://stats.stackexchange.com/questions/593079/interpretation-of-bernoulli-and-binomial-random-variables-in-a-call-simulation-c/593084?noredirect=1#comment1097323_593084
