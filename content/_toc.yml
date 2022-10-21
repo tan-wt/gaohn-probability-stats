@@ -7,6 +7,7 @@ parts:
   - caption: Chapter 1. Mathematical Preliminaries
     chapters:
       - file: 01_mathematical_preliminaries/01_combinatorics.md
+      - file: 01_mathematical_preliminaries/02_calculus.md
       - file: 01_mathematical_preliminaries/exercises.ipynb
   - caption: Chapter 2. Probability
     chapters:
@@ -38,3 +39,6 @@ parts:
     - file: 03_discrete_random_variables/0310_geometric_distribution.md
     - file: 03_discrete_random_variables/0311_poisson_distribution.md
     # - file: important.md 
+  - caption: Chapter 4. Continuous Random Variables
+    chapters:
+    - file: 04_continuous_random_variables/0401_probability_density_function.md
