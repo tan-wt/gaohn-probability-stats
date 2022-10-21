@@ -97,7 +97,7 @@ sphinx:
           "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
           "var": "\\operatorname{Var}"
           "std": "\\operatorname{Std}"
-          "bern": "\\operatorname{Bernoilli}"
+          "bern": "\\operatorname{Bernoulli}"
           "binomial": "\\operatorname{Binomial}"
           "geometric": "\\operatorname{Geometric}"
           "poisson": "\\operatorname{Poisson}"
