@@ -1,3 +1,10 @@
+# temp
+tmp.py
+tmp.md
+
+# reference
+references
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -129,6 +136,3 @@ site/
 # Airflow
 airflow/airflow.db
 
-# temp
-tmp.py
-tmp.md

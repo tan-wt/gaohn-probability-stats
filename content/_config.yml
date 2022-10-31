@@ -93,6 +93,7 @@ sphinx:
           "lpar": "\\left("
           "rpar": "\\right)"
           "pmf": "p_X"
+          "pdf": "f_X"
           "cdf": "F_X"
           "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
           "var": "\\operatorname{Var}"
