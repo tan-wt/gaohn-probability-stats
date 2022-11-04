@@ -24,7 +24,7 @@ parts:
     - file: 03_discrete_random_variables/0303_probability_mass_function.md
     - file: 03_discrete_random_variables/0304_cumulative_distribution_function.md
     - file: 03_discrete_random_variables/0305_expectation.md
-    - file: 03_discrete_random_variables/0306_variance_and_moments.md
+    - file: 03_discrete_random_variables/0306_moments_and_variance.md
     - file: 03_discrete_random_variables/0307_discrete_uniform_distribution.md
       sections:
       - file: 03_discrete_random_variables/0307_discrete_uniform_distribution_implementation.ipynb    
@@ -47,4 +47,6 @@ parts:
     - file: 04_continuous_random_variables/0401_continuous_random_variables.md
     - file: 04_continuous_random_variables/0402_probability_density_function.md
     - file: 04_continuous_random_variables/0403_expectation.md
+    - file: 04_continuous_random_variables/0404_moments_and_variance.md
+    - file: 04_continuous_random_variables/0405_cumulative_distribution_function.md
 
