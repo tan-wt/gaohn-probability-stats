@@ -44,6 +44,7 @@ parts:
   - caption: Chapter 4. Continuous Random Variables
     chapters:
     - file: 04_continuous_random_variables/from_discrete_to_continuous.md
+    - file: 04_continuous_random_variables/from_discrete_to_continuous_notebook.ipynb
     - file: 04_continuous_random_variables/0401_continuous_random_variables.md
     - file: 04_continuous_random_variables/0402_probability_density_function.md
     - file: 04_continuous_random_variables/0403_expectation.md
