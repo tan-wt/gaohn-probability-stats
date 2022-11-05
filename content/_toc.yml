@@ -50,4 +50,6 @@ parts:
     - file: 04_continuous_random_variables/0404_moments_and_variance.md
     - file: 04_continuous_random_variables/0405_cumulative_distribution_function.md
     - file: 04_continuous_random_variables/0406_mean_median_mode.md
-
+  - caption: References
+    chapters:
+    - file: bibliography/bibliography.md
