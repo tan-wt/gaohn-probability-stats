@@ -5,6 +5,55 @@ import random
 from typing import *
 
 
+def plot_continuous_pdf_and_cdf(
+    stats_dist: Callable,
+    low: float,
+    high: float,
+    title="Uniform Distribution",
+    lw: int = 3,
+    alpha: float = 0.7,
+    color: str = "darkred",
+    xlim: Optional[Tuple[float, float]] = None,
+    ylim: Optional[Tuple[float, float]] = None,
+):
+    x = np.linspace(low, high, 5000)
+    X = stats_dist  # symbolic X to represent the distribution
+
+    pdf = X.pdf(x)
+    cdf = X.cdf(x)
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+
+    if xlim is not None:
+        axes[0].set_xlim(*xlim)
+
+    if ylim is not None:
+        axes[0].set_ylim(*ylim)
+
+    axes[0].set_xlabel("x", fontsize=16)
+    axes[0].set_ylabel("pdf(x)", fontsize=16)
+
+    axes[0].plot(x, pdf, color=color, lw=lw, alpha=alpha)
+
+    axes[0].set_title(f"PDF of {title}", fontsize=16)
+
+    if xlim is not None:
+        axes[1].set_xlim(*xlim)
+
+    axes[1].set_ylim(
+        0, 1.1
+    )  # this can be hardcoded since the CDF is always between 0 and 1
+
+    axes[1].set_xlabel("x", fontsize=16)
+    axes[1].set_ylabel("cdf(x)", fontsize=16)
+
+    axes[1].plot(x, cdf, color=color, lw=lw, alpha=alpha)
+
+    axes[1].set_title(f"CDF of {title}", fontsize=16)
+
+    plt.show()
+
+
 def seed_all(seed: int = 1992) -> None:
     """Seed all random number generators."""
     print(f"Using Seed Number {seed}")
