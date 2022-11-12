@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import random
 from typing import *
 
-
+# pylint: disable=too-many-arguments
 def plot_continuous_pdf_and_cdf(
     stats_dist: Callable,
     low: float,
@@ -15,14 +15,16 @@ def plot_continuous_pdf_and_cdf(
     color: str = "darkred",
     xlim: Optional[Tuple[float, float]] = None,
     ylim: Optional[Tuple[float, float]] = None,
-):
+    figsize: Tuple[float, float] = (10, 5),
+) -> None:
+    """Plots the PDF and CDF of a continuous distribution."""
     x = np.linspace(low, high, 5000)
     X = stats_dist  # symbolic X to represent the distribution
 
     pdf = X.pdf(x)
     cdf = X.cdf(x)
 
-    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+    fig, axes = plt.subplots(1, 2, figsize=figsize)
 
     if xlim is not None:
         axes[0].set_xlim(*xlim)
@@ -110,3 +112,15 @@ def plot_discrete_pmf(low, high, title, stats_dist=None, lw=20, **kwargs) -> Non
     plt.xticks(np.arange(low, high + 1, 1))
     plt.legend()
     plt.show()
+
+
+if __name__ == "__main__":
+    seed_all()
+
+    # Standard Normal Distribution
+    mean, sigma = 0, 1
+    X = stats.norm(mean, sigma)
+
+    plot_continuous_pdf_and_cdf(
+        X, -5, 5, title="Normal Distribution $\mu=0, \sigma=1$", figsize=(15, 5)
+    )

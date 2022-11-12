@@ -64,6 +64,7 @@ sphinx:
     mathjax3_config:
       tex:
         macros:
+          "defeq": "\\overset{\\text{def}}{=}"
           "st": "\\mid"
           "mod": "\\mid"
           "S": "\\Omega"
@@ -93,6 +94,8 @@ sphinx:
           "rsq": "\\right]"
           "lpar": "\\left("
           "rpar": "\\right)"
+          "lcurl": "\\left\\{"
+          "rcurl": "\\right\\}"
           "pmf": "p_X"
           "pdf": "f_X"
           "cdf": "F_X"

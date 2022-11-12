@@ -40,7 +40,7 @@ parts:
     - file: 03_discrete_random_variables/0311_poisson_distribution.md
       sections:
       - file: 03_discrete_random_variables/0311_poisson_distribution_implementation.ipynb
-    - file: 03_discrete_random_variables/problems_and_solutions.md
+    - file: 03_discrete_random_variables/03_problems_and_solutions.md
     # - file: important.md 
   - caption: Chapter 4. Continuous Random Variables
     chapters:
