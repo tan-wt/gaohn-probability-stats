@@ -54,6 +54,7 @@ parts:
     - file: 04_continuous_random_variables/0407_continuous_uniform_distribution.md
     - file: 04_continuous_random_variables/0408_exponential_distribution.md
     - file: 04_continuous_random_variables/0409_gaussian_distribution.md
+    - file: 04_continuous_random_variables/0410_skewness_and_kurtosis.md
   - caption: References
     chapters:
     - file: bibliography/bibliography.md
