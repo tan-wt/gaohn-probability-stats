@@ -65,6 +65,8 @@ sphinx:
       tex:
         macros:
           "defeq": "\\overset{\\text{def}}{=}"
+          "defa": "\\overset{\\text{(a)}}{=}"
+          "defb": "\\overset{\\text{(b)}}{=}"
           "st": "\\mid"
           "mod": "\\mid"
           "S": "\\Omega"
