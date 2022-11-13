@@ -1,10 +1,12 @@
-import scipy.stats as stats
-import numpy as np
-import matplotlib.pyplot as plt
 import random
-from typing import *
+from typing import Callable, Optional, Tuple
 
-# pylint: disable=too-many-arguments
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import stats
+
+
+# pylint: disable=too-many-arguments,too-many-locals
 def plot_continuous_pdf_and_cdf(
     stats_dist: Callable,
     low: float,
