@@ -3,6 +3,7 @@
 
 format: jb-book
 root: intro.md
+
 parts:
   - caption: Chapter 1. Mathematical Preliminaries
     chapters:
@@ -55,6 +56,8 @@ parts:
     - file: 04_continuous_random_variables/0408_exponential_distribution.md
     - file: 04_continuous_random_variables/0409_gaussian_distribution.md
     - file: 04_continuous_random_variables/0410_skewness_and_kurtosis.md
-  - caption: References
+    - file: 04_continuous_random_variables/0411_convolve_and_sum_of_random_variables.md
+  - caption: References and Resources
     chapters:
     - file: bibliography/bibliography.md
+    - file: resources.md
