@@ -6,6 +6,9 @@ import numpy as np
 from scipy import stats
 
 
+# plt.rcParams["figure.dpi"] = 600
+# plt.rcParams["savefig.dpi"] = 600
+
 # pylint: disable=too-many-arguments
 def plot_empirical_hist_distribution(
     distribution: np.ndarray,
@@ -223,8 +226,8 @@ def plot_discrete_pmf(
         ax.set_xticks(xticks)
 
     ax.set_title(title)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, fontsize=12)
+    ax.set_ylabel(ylabel, fontsize=12)
     ax.legend(loc="upper right")
     return stem
 
@@ -268,7 +271,7 @@ def plot_multiple_binomial_pmf() -> None:
     """Plot the PMF of a Binomial distribution."""
     # `X` is now an object that represents a Binomial random variable with parameter $p$ and $n$.
 
-    fig, axes = plt.subplots(2, 1, figsize=(30, 20))
+    fig, axes = plt.subplots(2, 1, figsize=(10, 10))
 
     ############# Fix n = 60, vary p #############
     n, p = 60, 0.1
@@ -284,6 +287,8 @@ def plot_multiple_binomial_pmf() -> None:
     X3 = stats.binom(n, p)
     states_x3 = np.arange(0, n + 1)  # The states of the distribution X3
 
+    xticks = np.arange(0, 60 + 1, 5)
+
     plot_discrete_pmf(
         X1,
         states=states_x1,
@@ -292,6 +297,7 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=60, p=0.1$",
         title=f"PMF of Binomial, Fixed $n={n}$, Varying $p$",
         ax=axes[0],
+        xticks=xticks,
     )
     plot_discrete_pmf(
         X2,
@@ -301,6 +307,7 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=60, p=0.5$",
         title=f"PMF of Binomial, Fixed $n={n}$, Varying $p$",
         ax=axes[0],
+        xticks=xticks,
     )
     plot_discrete_pmf(
         X3,
@@ -310,9 +317,10 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=60, p=0.9$",
         title=f"PMF of Binomial, Fixed $n={n}$, Varying $p$",
         ax=axes[0],
+        xticks=xticks,
     )
 
-    ############# Fix p=0.5, vary n #############
+    ############# Fix p=0.5, vary n ##############
     n, p = 5, 0.5
     X1 = stats.binom(n, p)
     states_x1 = np.arange(0, n + 1)  # The states of the distribution X1
@@ -326,6 +334,8 @@ def plot_multiple_binomial_pmf() -> None:
     X3 = stats.binom(n, p)
     states_x3 = np.arange(0, n + 1)  # The states of the distribution X3
 
+    xticks = np.arange(0, 100 + 1, 10)
+
     plot_discrete_pmf(
         X1,
         states=states_x1,
@@ -334,6 +344,7 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=5, p=0.5$",
         title=f"PMF of Binomial, Fixed $p={p}$, Varying $n$",
         ax=axes[1],
+        xticks=xticks,
     )
     plot_discrete_pmf(
         X2,
@@ -343,6 +354,7 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=50, p=0.5$",
         title=f"PMF of Binomial, Fixed $p={p}$, Varying $n$",
         ax=axes[1],
+        xticks=xticks,
     )
     plot_discrete_pmf(
         X3,
@@ -352,6 +364,7 @@ def plot_multiple_binomial_pmf() -> None:
         label="$n=100, p=0.5$",
         title=f"PMF of Binomial, Fixed $p={p}$, Varying $n$",
         ax=axes[1],
+        xticks=xticks,
     )
 
     plt.show()
