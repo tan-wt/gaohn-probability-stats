@@ -15,27 +15,33 @@ kernelspec:
   name: python3
 ---
 
-# Important Brain Dump
+# Important
+
+This section is a placeholder as need time to digest. Later on we can put the content below back to their respective sections.
+
+- Revisit the idea of the histogram, even a section during PMF is good as a refresher!
+- Try to think about how to write PMF as an ideal histogram into my notes, especially from the machine learning perspective.
+- Early mention of empirical CDF vs CDF, empirical histogram vs PMF
+
+## Important Brain Dump
 
 Some important stuff here which I need to remember and yet to be able to formalize.
 
 **Always refer to my example setup.**
 
-## Temp Writings
 
+### Important Topics
 
-## Important Topics
+See `0307_discrete_uniform_distribution` for my whole setup.
 
-See {doc}`./03_discrete_random_variables/0307_discrete_uniform_distribution` for my whole setup.
-
-## The Empirical vs Theoretical Distribution Setup
+### The Empirical vs Theoretical Distribution Setup
 
 - https://inferentialthinking.com/chapters/intro.html
-- See {doc}`./03_discrete_random_variables/0307_discrete_uniform_distribution` for my whole setup.
+- See `0307_discrete_uniform_distribution` for my whole setup.
 
-## The Problem
+### The Problem
 
-### The ticket model and what is a r.v
+#### The ticket model and what is a r.v
 
 - https://stats.stackexchange.com/questions/50/what-is-meant-by-a-random-variable/54894#54894
 - https://stats.stackexchange.com/questions/68599/distribution-of-correlation-coefficient-between-two-discrete-random-variables-an/68782#68782
@@ -54,7 +60,7 @@ This aside, what is more important is that we say $X$ is a r.v. that represents 
 And the randomness comes from we don't know which ticket we pick, as it could be any person representing any height.
 But once **it is picked**, the **realization** of the r.v. is the height of the person, say hongnan with height 175 cm.
 
-### Why data points are considered random variables
+#### Why data points are considered random variables
 
 - See https://mathstat.slu.edu/~speegle/_book/SimulationRV.html
 - In ml context, Random variables $X_1, X_2, \ldots X_{???}$ are the data points of the height of people, and the true population space is the set of all possible data points (in our case it is actually 1 million people).
@@ -66,14 +72,14 @@ $X_i$ has the same probability distribution. Say $n=10$ people. It turns out we 
 are **numbered**, and each $X_i$ is actually remember is a deterministic answer after realization, and therefore the numbering makes sense. We treat each draw of the ticket as a random variable, and the numbering is just a way to index the random variables.
 - Furthermore, we usually take a random sample of size $n$ from the population box, and treat each draw as a rv.
 
-### Super important
+#### Super important
 
 Above has a hazy concept, one one hand sample space is a set and therefore should be unique, but on the other hand, if there's 1000 people
 in the true population, and we treat the population box as the sample space, then the sample space is no longer "unique" since there are 
 only 100 distinct heights? However, if we number the tickets, then the sample space is unique, in a way we are playing abuse of notation
 that two different people with the same height 175 cm are two distinct outcomes in the sample space. This is very important to realize!!!
 
-### Empirical distribution/histogram
+#### Empirical distribution/histogram
 
 To put more concrete example, consider the same experiment above, define the rv $X$ to be the height of a person,
 then find probability of getting a person with height 175 cm, say $P(X=175) = ?$.
@@ -122,3 +128,17 @@ here is **empirical** distribution and is non-deterministic.
 
 - https://stats.stackexchange.com/questions/590792/empirical-histogram-and-pmf
 - https://stats.stackexchange.com/questions/593079/interpretation-of-bernoulli-and-binomial-random-variables-in-a-call-simulation-c/593084?noredirect=1#comment1097323_593084
+
+
+### Ideal histogram
+
+- Experiment: roll a dice once to see what number comes up.
+- Prof drew a very important diagram towards the end of lecture 10, on how histograms tend to their PMF as a number of experiments tend to infinity, and how each histogram mean (sample mean) tends to its PMF's expectation (population mean). I believe this part is very very important and needs to be bookmarked in my notes and treated as a header. This is because he mentioned how sample mean is random but population mean (expectation) is deterministic, which implies histograms are random (i.e randomly drawn samples from the population while PMF is deterministic (?)).
+
+### Expectation is deterministic
+
+### Variance
+
+- In lecture video around 28 minute onwards prof gave a good intuition of visualizing variance.
+- Intuition why why DC shift dont shift var.
+- Min 45 onwards PMF vs Histogram same holds for sample variance vs population variance etc.
