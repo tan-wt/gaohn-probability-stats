@@ -31,14 +31,14 @@ parts:
     - file: 03_discrete_random_variables/0307_discrete_uniform_distribution.md
       sections:
       - file: 03_discrete_random_variables/0307_discrete_uniform_distribution_implementation.ipynb    
-    - file: 03_discrete_random_variables/0308_bernoulli_distribution.md
+    - file: 03_discrete_random_variables/0308_bernoulli_distribution_concept.md
       sections:
       - file: 03_discrete_random_variables/0308_bernoulli_distribution_implementation.ipynb
     - file: 03_discrete_random_variables/iid.md
-    - file: 03_discrete_random_variables/0309_binomial_distribution.md
+    - file: 03_discrete_random_variables/0309_binomial_distribution_concept.md
       sections:
       - file: 03_discrete_random_variables/0309_binomial_distribution_implementation.ipynb
-      - file: 03_discrete_random_variables/0309_binomial_distribution_real_world_examples.ipynb
+      - file: 03_discrete_random_variables/0309_binomial_distribution_application.ipynb
     - file: 03_discrete_random_variables/0310_geometric_distribution.md
     - file: 03_discrete_random_variables/0311_poisson_distribution.md
       sections:

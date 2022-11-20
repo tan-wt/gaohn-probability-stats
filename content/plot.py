@@ -13,8 +13,9 @@ random.shuffle(COLOR_INDEXES)
 
 
 def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
-    empirical_distribution: np.ndarray,
+    distribution: Callable,
     states: np.ndarray,
+    size: int = 1000,
     bins: Optional[Union[List[float], np.ndarray]] = None,
     ax: Optional[plt.Axes] = None,
     ax_kwargs: Optional[Dict[str, Any]] = None,
@@ -35,11 +36,15 @@ def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
             "density": True,
         }
 
+    empirical_samples = distribution.rvs(size=size)
+    # print(f"Empirical samples: {empirical_samples}")
+
     # center the bins on the states, for discrete distributions.
-    bins = states - 0.5 if bins is None else bins
+    bins = np.arange(0, states.max() + 1.5) - 0.5 if bins is None else bins
+    # print(f"Bins: {bins}")
 
     _, _, hist = ax.hist(
-        empirical_distribution,
+        empirical_samples,
         bins,
         **hist_kwargs,
     )
@@ -48,10 +53,11 @@ def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
         ax_kwargs.get("title", "Empirical Histogram/Distribution"), fontsize=16
     )
     ax.set_xlabel(ax_kwargs.get("xlabel", "x"), fontsize=12)
-    ax.set_ylabel(ax_kwargs.get("ylabel", "$\mathbb{P}[X = x]$"), fontsize=12)
+    ax.set_ylabel(ax_kwargs.get("ylabel", "relative frequency"), fontsize=12)
     ax.set_xticks(ax_kwargs.get("xticks", bins + 0.5))
     ax.set_xlim(*ax_kwargs.get("xlim", (min(bins), max(bins))))
     # ax.set_ylim(*ax_kwargs.get("ylim", (0, 1)))
+    ax.legend(loc="best")
     return hist
 
 
@@ -139,6 +145,74 @@ def plot_bernoulli_pmf(p: float, ax: Optional[plt.Axes] = None) -> StemContainer
         X, states=states, ax=ax, ax_kwargs=ax_kwargs, **stem_kwargs
     )
     return stem
+
+
+def plot_empirical_bernoulli(
+    p: float, size: int = 1000, ax: Optional[plt.Axes] = None
+) -> BarContainer:
+    """Plot the empirical distribution of a Bernoulli distribution."""
+    # X is now an object that represents a Bernoulli random variable with parameter $p$.
+    X = stats.bernoulli(p)
+    states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
+    bins = np.arange(0, states.max() + 1.5) - 0.5
+
+    ax_kwargs = {
+        "title": None,
+        "ylabel": None,
+    }
+    hist_kwargs = {
+        "edgecolor": "black",
+        "linewidth": 2,
+        "alpha": 0.5,
+        "color": "#0504AA",
+        "density": True,
+        "label": "Empirical Histogram",
+    }
+
+    hist = plot_discrete_empirical_histogram(
+        X,
+        states=states,
+        size=size,
+        bins=bins,
+        ax=ax,
+        ax_kwargs=ax_kwargs,
+        **hist_kwargs,
+    )
+    return hist
+
+
+def plot_empirical_binomial(
+    p: float, n: int, size: int = 1000, ax: Optional[plt.Axes] = None
+) -> BarContainer:
+    """Plot the empirical distribution of a Bernoulli distribution."""
+
+    X = stats.binom(n, p)
+    states = np.arange(0, n + 1)  # Binomial has n + 1 states.
+    bins = np.arange(0, states.max() + 1.5) - 0.5
+
+    ax_kwargs = {
+        "title": None,
+        "ylabel": None,
+    }
+    hist_kwargs = {
+        "edgecolor": "black",
+        "linewidth": 2,
+        "alpha": 0.5,
+        "color": "#0504AA",
+        "density": True,
+        "label": "Empirical Histogram",
+    }
+
+    hist = plot_discrete_empirical_histogram(
+        X,
+        states=states,
+        size=size,
+        bins=bins,
+        ax=ax,
+        ax_kwargs=ax_kwargs,
+        **hist_kwargs,
+    )
+    return hist
 
 
 def plot_binomial_pmfs(
@@ -237,40 +311,51 @@ def plot_geometric_pmfs(
 
 if __name__ == "__main__":
     # Uniform PMF
-    _fig, ax = plt.subplots(1, figsize=(8, 6))
-    plot_discrete_uniform_pmf(a=1, b=6, ax=ax)
-    low, high = 1, 6 + 1  # [1, 6] for dice roll
-    X = stats.randint(low, high)
-    Z1 = X.rvs(size=10000)
-    states_z1 = np.arange(low, high + 1)
-
-    plot_discrete_empirical_histogram(
-        Z1,
-        states=states_z1,
-    )
-    plt.show()
-
-    _fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-    plot_discrete_uniform_pmf(a=1, b=6, ax=axes[0])
-    low, high = 1, 6 + 1  # [1, 6] for dice roll
-    X = stats.randint(low, high)
-    Z1 = X.rvs(size=10000)
-    states_z1 = np.arange(low, high + 1)
-
-    plot_discrete_empirical_histogram(
-        Z1,
-        states=states_z1,
-        ax=axes[1],
-    )
-    plt.show()
-    # Bernoulli PMF
     # _fig, ax = plt.subplots(1, figsize=(8, 6))
-    # plot_bernoulli_pmf(p=0.2, ax=ax)
+    # plot_discrete_uniform_pmf(a=1, b=6, ax=ax)
+    # low, high = 1, 6 + 1  # [1, 6] for dice roll
+    # X = stats.randint(low, high)
+    # Z1 = X.rvs(size=10000)
+    # states_z1 = np.arange(low, high + 1)
+
+    # plot_discrete_empirical_histogram(
+    #     X,
+    #     states=states_z1,
+    # )
+    # plt.show()
+
+    # _fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+    # plot_discrete_uniform_pmf(a=1, b=6, ax=axes[0])
+    # low, high = 1, 6 + 1  # [1, 6] for dice roll
+    # X = stats.randint(low, high)
+    # Z1 = X.rvs(size=10000)
+    # states_z1 = np.arange(low, high + 1)
+
+    # plot_discrete_empirical_histogram(
+    #     Z1,
+    #     states=states_z1,
+    #     ax=axes[1],
+    # )
+    # plt.show()
+
+    # Bernoulli PMF
+    # fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.8), sharey=True, dpi=100)
+    # plot_bernoulli_pmf(p=0.2, ax=axes[0])
+    # plot_empirical_bernoulli(p=0.2, size=100, ax=axes[0])
+
+    # plot_bernoulli_pmf(p=0.2, ax=axes[1])
+    # plot_empirical_bernoulli(p=0.2, size=1000, ax=axes[1])
+
+    # fig.supylabel("relative frequency")
+    # fig.suptitle("Histogram of Bernoulli($p=0.2$) based on $100$ and $1000$ samples.")
+    # plt.show()
 
     # Binomial PMF
-    # _fig, ax = plt.subplots(1, figsize=(12, 8))
-    # plot_binomial_pmfs(ns=[3], ps=[0.2], ax=ax)
-    # plt.show()
+    # p=0.2, n=3
+    _fig, ax = plt.subplots(1, figsize=(12, 8))
+    plot_binomial_pmfs(ns=[3], ps=[0.2], ax=ax)
+    # plot_empirical_binomial(n=3, p=0.2, size=1000, ax=ax)
+    plt.show()
 
     # _fig, axes = plt.subplots(2, 1, figsize=(10, 10))
     # plot_binomial_pmfs(ns=[60, 60, 60], ps=[0.1, 0.5, 0.9], ax=axes[0])
