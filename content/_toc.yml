@@ -10,6 +10,7 @@ parts:
       - file: 01_mathematical_preliminaries/01_combinatorics.md
       - file: 01_mathematical_preliminaries/02_calculus.md
       - file: 01_mathematical_preliminaries/exercises.ipynb
+      
   - caption: Chapter 2. Probability
     chapters:
     - file: 02_probability/0202_probability_space.md
@@ -18,6 +19,7 @@ parts:
     - file: 02_probability/0205_independence.md
     - file: 02_probability/0206_bayes_theorem.md
     - file: 02_probability/summary.md
+
   - caption: Chapter 3. Discrete Random Variables
     chapters: 
     - file: 03_discrete_random_variables/0301_random_variables.md
@@ -43,6 +45,7 @@ parts:
       - file: 03_discrete_random_variables/0311_poisson_distribution_implementation.ipynb
     # - file: 03_discrete_random_variables/summary.md
     - file: 03_discrete_random_variables/exercises.md
+
   - caption: Chapter 4. Continuous Random Variables
     chapters:
     - file: 04_continuous_random_variables/from_discrete_to_continuous.md
@@ -57,6 +60,11 @@ parts:
     - file: 04_continuous_random_variables/0409_gaussian_distribution.md
     - file: 04_continuous_random_variables/0410_skewness_and_kurtosis.md
     - file: 04_continuous_random_variables/0411_convolve_and_sum_of_random_variables.md
+
+  - caption: Chapter 5. Joint Distributions
+    chapters:
+    - file: 05_joint_distributions/braindump.md
+
   - caption: References and Resources
     chapters:
     - file: references_and_resources/bibliography.md
