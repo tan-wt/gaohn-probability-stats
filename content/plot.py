@@ -126,19 +126,19 @@ def plot_discrete_uniform_pmf(
     return stem
 
 
-def plot_bernoulli_pmf(p: float) -> None:
+def plot_bernoulli_pmf(p: float, ax: Optional[plt.Axes] = None) -> StemContainer:
     """Plot the PMF of a Bernoulli distribution."""
     # X is now an object that represents a Bernoulli random variable with parameter $p$.
     X = stats.bernoulli(p)
     states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
 
-    _fig, ax = plt.subplots(1, figsize=(8, 6))
-
     ax_kwargs = {"title": f"PMF of Bernoulli($p={p}$)"}
     stem_kwargs = {"linefmt": "r-", "markerfmt": "ro", "basefmt": "C7-", "label": "PMF"}
 
-    plot_discrete_pmf(X, states=states, ax=ax, ax_kwargs=ax_kwargs, **stem_kwargs)
-    plt.show()
+    stem = plot_discrete_pmf(
+        X, states=states, ax=ax, ax_kwargs=ax_kwargs, **stem_kwargs
+    )
+    return stem
 
 
 def plot_binomial_pmfs(
@@ -264,7 +264,8 @@ if __name__ == "__main__":
     )
     plt.show()
     # Bernoulli PMF
-    # plot_bernoulli_pmf(p=0.2)
+    # _fig, ax = plt.subplots(1, figsize=(8, 6))
+    # plot_bernoulli_pmf(p=0.2, ax=ax)
 
     # Binomial PMF
     # _fig, ax = plt.subplots(1, figsize=(12, 8))
