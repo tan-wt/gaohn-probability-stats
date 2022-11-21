@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.container import BarContainer, StemContainer
 from scipy import stats
+import seaborn as sns
 from utils import seed_all
+import matplotlib
 
 seed_all(42)
 COLOR_INDEXES = list(range(0, 10))
@@ -20,7 +22,7 @@ def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
     ax: Optional[plt.Axes] = None,
     ax_kwargs: Optional[Dict[str, Any]] = None,
     **hist_kwargs: Dict[str, Any],
-) -> BarContainer:
+) -> plt.Axes:
     """Takes in a distribution (population or sample values), and plots the empirical distribution."""
     ax = ax or plt.gca()
 
@@ -33,7 +35,8 @@ def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
             "linewidth": 2,
             "alpha": 0.5,
             "color": "#0504AA",
-            "density": True,
+            "stat": "probability",  # "density",
+            "discrete": True,
         }
 
     empirical_samples = distribution.rvs(size=size)
@@ -43,11 +46,13 @@ def plot_discrete_empirical_histogram(  # pylint: disable=too-many-arguments
     bins = np.arange(0, states.max() + 1.5) - 0.5 if bins is None else bins
     # print(f"Bins: {bins}")
 
-    _, _, hist = ax.hist(
-        empirical_samples,
-        bins,
-        **hist_kwargs,
-    )
+    # Matplotlib version.
+    # _, _, hist = ax.hist(
+    #     empirical_samples,
+    #     bins,
+    #     **hist_kwargs,
+    # )
+    hist = sns.histplot(empirical_samples, bins=bins, ax=ax, **hist_kwargs)
 
     ax.set_title(
         ax_kwargs.get("title", "Empirical Histogram/Distribution"), fontsize=16
@@ -134,6 +139,7 @@ def plot_discrete_uniform_pmf(
 
 def plot_bernoulli_pmf(p: float, ax: Optional[plt.Axes] = None) -> StemContainer:
     """Plot the PMF of a Bernoulli distribution."""
+    ax = ax or plt.gca()
     # X is now an object that represents a Bernoulli random variable with parameter $p$.
     X = stats.bernoulli(p)
     states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
@@ -149,8 +155,9 @@ def plot_bernoulli_pmf(p: float, ax: Optional[plt.Axes] = None) -> StemContainer
 
 def plot_empirical_bernoulli(
     p: float, size: int = 1000, ax: Optional[plt.Axes] = None
-) -> BarContainer:
+) -> Union[BarContainer, plt.Axes]:
     """Plot the empirical distribution of a Bernoulli distribution."""
+    ax = ax or plt.gca()
     # X is now an object that represents a Bernoulli random variable with parameter $p$.
     X = stats.bernoulli(p)
     states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
@@ -183,9 +190,9 @@ def plot_empirical_bernoulli(
 
 def plot_empirical_binomial(
     p: float, n: int, size: int = 1000, ax: Optional[plt.Axes] = None
-) -> BarContainer:
+) -> Union[BarContainer, plt.Axes]:
     """Plot the empirical distribution of a Bernoulli distribution."""
-
+    ax = ax or plt.gca()
     X = stats.binom(n, p)
     states = np.arange(0, n + 1)  # Binomial has n + 1 states.
     bins = np.arange(0, states.max() + 1.5) - 0.5
@@ -199,7 +206,7 @@ def plot_empirical_binomial(
         "linewidth": 2,
         "alpha": 0.5,
         "color": "#0504AA",
-        "density": True,
+        "stat": "probability",
         "label": "Empirical Histogram",
     }
 
@@ -280,6 +287,45 @@ def plot_poisson_pmfs(
     return stem
 
 
+def plot_empirical_poisson(
+    lambdas: List[int], size: int = 1000, ax: Optional[plt.Axes] = None
+) -> Union[BarContainer, plt.Axes]:
+    """Plot the empirical distribution of a Bernoulli distribution."""
+    ax = ax or plt.gca()
+
+    for lam in lambdas:
+        X = stats.poisson(lam)
+        states = np.arange(
+            0, 30
+        )  # Poisson has infinite states, but we only plot up to 30.
+
+        bins = np.arange(0, states.max() + 1.5) - 0.5
+
+        ax_kwargs = {
+            "title": None,
+            "ylabel": None,
+        }
+        hist_kwargs = {
+            "edgecolor": "black",
+            "linewidth": 2,
+            "alpha": 0.5,
+            "color": "#0504AA",
+            "stat": "probability",
+            "label": "Empirical Histogram",
+        }
+
+        hist = plot_discrete_empirical_histogram(
+            X,
+            states=states,
+            size=size,
+            bins=bins,
+            ax=ax,
+            ax_kwargs=ax_kwargs,
+            **hist_kwargs,
+        )
+    return hist
+
+
 def plot_geometric_pmfs(
     ps: List[float], ax: Optional[plt.Axes] = None
 ) -> StemContainer:
@@ -352,10 +398,10 @@ if __name__ == "__main__":
 
     # Binomial PMF
     # p=0.2, n=3
-    _fig, ax = plt.subplots(1, figsize=(12, 8))
-    plot_binomial_pmfs(ns=[3], ps=[0.2], ax=ax)
+    # _fig, ax = plt.subplots(1, figsize=(12, 8))
+    # plot_binomial_pmfs(ns=[3], ps=[0.2], ax=ax)
     # plot_empirical_binomial(n=3, p=0.2, size=1000, ax=ax)
-    plt.show()
+    # plt.show()
 
     # _fig, axes = plt.subplots(2, 1, figsize=(10, 10))
     # plot_binomial_pmfs(ns=[60, 60, 60], ps=[0.1, 0.5, 0.9], ax=axes[0])
@@ -368,7 +414,8 @@ if __name__ == "__main__":
     # plt.show()
 
     # Poisson PMF
-    # _fig = plt.figure(figsize=(12, 8))
-    # lambdas = [5, 10, 20]
-    # plot_poisson_pmfs(lambdas=lambdas)
-    # plt.show()
+    _fig = plt.figure(figsize=(12, 8))
+    lambdas = [5, 10, 20]
+    plot_poisson_pmfs(lambdas=lambdas)
+    plot_empirical_poisson(lambdas=lambdas)
+    plt.show()

@@ -39,8 +39,8 @@ parts:
       sections:
       - file: 03_discrete_random_variables/0309_binomial_distribution_implementation.ipynb
       - file: 03_discrete_random_variables/0309_binomial_distribution_application.ipynb
-    - file: 03_discrete_random_variables/0310_geometric_distribution.md
-    - file: 03_discrete_random_variables/0311_poisson_distribution.md
+    - file: 03_discrete_random_variables/0310_geometric_distribution_concept.md
+    - file: 03_discrete_random_variables/0311_poisson_distribution_concept.md
       sections:
       - file: 03_discrete_random_variables/0311_poisson_distribution_implementation.ipynb
     # - file: 03_discrete_random_variables/summary.md
