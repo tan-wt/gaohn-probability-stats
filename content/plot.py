@@ -172,7 +172,7 @@ def plot_empirical_bernoulli(
         "linewidth": 2,
         "alpha": 0.5,
         "color": "#0504AA",
-        "density": True,
+        "stat": "probability",
         "label": "Empirical Histogram",
     }
 
@@ -385,16 +385,16 @@ if __name__ == "__main__":
     # plt.show()
 
     # Bernoulli PMF
-    # fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.8), sharey=True, dpi=100)
-    # plot_bernoulli_pmf(p=0.2, ax=axes[0])
-    # plot_empirical_bernoulli(p=0.2, size=100, ax=axes[0])
+    fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.8), sharey=True, dpi=100)
+    plot_bernoulli_pmf(p=0.2, ax=axes[0])
+    plot_empirical_bernoulli(p=0.2, size=100, ax=axes[0])
 
-    # plot_bernoulli_pmf(p=0.2, ax=axes[1])
-    # plot_empirical_bernoulli(p=0.2, size=1000, ax=axes[1])
+    plot_bernoulli_pmf(p=0.2, ax=axes[1])
+    plot_empirical_bernoulli(p=0.2, size=1000, ax=axes[1])
 
-    # fig.supylabel("relative frequency")
-    # fig.suptitle("Histogram of Bernoulli($p=0.2$) based on $100$ and $1000$ samples.")
-    # plt.show()
+    fig.supylabel("relative frequency")
+    fig.suptitle("Histogram of Bernoulli($p=0.2$) based on $100$ and $1000$ samples.")
+    plt.show()
 
     # Binomial PMF
     # p=0.2, n=3
