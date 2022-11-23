@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
 import random
+from abc import ABC
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Union, Generic, TypeVar
+from typing import Any, Callable, Dict, List, Optional, TypeVar, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,8 +13,7 @@ from scipy import stats
 from utils import seed_all
 
 T = TypeVar("T", str, int, float)
-
-
+FigAxParams = Dict[str, Dict[str, T]]
 seed_all(42)
 
 
@@ -29,25 +28,10 @@ class Plot(ABC):
     """
 
     states: np.ndarray
-    default_ax_params: Dict[str, Any] = field(init=False)  # default
-    custom_ax_params: Dict[str, Any] = field(default_factory=dict)
-    custom_fig_params: Dict[str, Any] = field(default_factory=dict)
+    default_ax_params: FigAxParams = field(init=False)  # default
+    custom_ax_params: FigAxParams = field(default_factory=dict)
+    custom_fig_params: FigAxParams = field(default_factory=dict)
     color_index: List[int] = field(default_factory=lambda: list(range(10)))
-
-    @staticmethod
-    def shuffle(container: List[int]) -> None:
-        """Randomly shuffle a list in place."""
-        random.shuffle(container)
-
-    def _update_default_ax_params(self) -> Dict[str, Any]:
-        """Update the ax params with the custom_ax_params if any.
-
-        Returns:
-            The updated ax params.
-        """
-        if self.custom_ax_params:  # if custom_ax_params is not empty
-            for ax_attr, ax_params in self.custom_ax_params.items():
-                self.default_ax_params.update({ax_attr: ax_params})
 
     @property
     def low(self) -> int:
@@ -60,21 +44,28 @@ class Plot(ABC):
         return self.states.max()
 
     @property
-    def default_fig_params(self) -> Dict[str, Any]:
+    def default_fig_params(self) -> FigAxParams:
         """The default figure params.
         TODO: not used in code yet, to consider.
         """
-        return {
-            "figsize": (10, 6),
-            "tight_layout": True,
-        }
+
+    def _update_default_ax_params(self) -> None:
+        """Update the ax params with the custom_ax_params if any."""
+        if self.custom_ax_params:  # if custom_ax_params is not empty
+            for ax_attr, ax_params in self.custom_ax_params.items():
+                self.default_ax_params.update({ax_attr: ax_params})
+
+    @staticmethod
+    def shuffle(container: List[int]) -> None:
+        """Randomly shuffle a list in place."""
+        random.shuffle(container)
 
 
 @dataclass(frozen=False, init=True)
 class PMF(Plot):
     """PMF plot params."""
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.default_ax_params = {
             "set_title": {"label": "PMF", "fontsize": 16},
             "set_xlabel": {"xlabel": "x", "fontsize": 12},
@@ -93,7 +84,7 @@ class EmpiricalHistogram(Plot):
     bins: Optional[Union[List[float], np.ndarray]] = None
     size: int = 1000  # number of samples to draw from the distribution
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.bins = (
             np.arange(0, self.high + 1.5) - 0.5 if self.bins is None else self.bins
         )
