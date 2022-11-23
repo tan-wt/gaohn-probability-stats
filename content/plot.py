@@ -1,61 +1,102 @@
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
 import random
-from typing import Any, Callable, Dict, List, Optional, Union
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Union, Generic, TypeVar
 
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 from matplotlib.container import BarContainer, StemContainer
 from scipy import stats
-import seaborn as sns
 from utils import seed_all
-from dataclasses import dataclass, field
+
+T = TypeVar("T", str, int, float)
+
 
 seed_all(42)
 
 
 @dataclass(frozen=False, init=True)
-class Plot:
+class Plot(ABC):
     """Plot params.
 
     Args:
-        states (np.ndarray): The states of the distribution, basically the range of the rv X.
+        states (np.ndarray): The states of the distribution. For example, if a rv X
+            is a binomial distribution with n=10, p=0.5, then the states are
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], the values which X can take.
     """
 
     states: np.ndarray
     default_ax_params: Dict[str, Any] = field(init=False)  # default
     custom_ax_params: Dict[str, Any] = field(default_factory=dict)
     custom_fig_params: Dict[str, Any] = field(default_factory=dict)
-    color_index: List[int] = list(range(0, 10))
-    random.shuffle(COLOR_INDEXES)
+    color_index: List[int] = field(default_factory=lambda: list(range(10)))
+
+    @staticmethod
+    def shuffle(container: List[int]) -> None:
+        """Randomly shuffle a list in place."""
+        random.shuffle(container)
+
+    def _update_default_ax_params(self) -> Dict[str, Any]:
+        """Update the ax params with the custom_ax_params if any.
+
+        Returns:
+            The updated ax params.
+        """
+        if self.custom_ax_params:  # if custom_ax_params is not empty
+            for ax_attr, ax_params in self.custom_ax_params.items():
+                self.default_ax_params.update({ax_attr: ax_params})
+
+    @property
+    def low(self) -> int:
+        """The lower bound of the states."""
+        return self.states.min()
+
+    @property
+    def high(self) -> int:
+        """The upper bound of the states."""
+        return self.states.max()
+
+    @property
+    def default_fig_params(self) -> Dict[str, Any]:
+        """The default figure params.
+        TODO: not used in code yet, to consider.
+        """
+        return {
+            "figsize": (10, 6),
+            "tight_layout": True,
+        }
 
 
 @dataclass(frozen=False, init=True)
-class PMFPlot(Plot):
+class PMF(Plot):
     """PMF plot params."""
 
     def __post_init__(self):
-        low, high = self.states.min(), self.states.max()
         self.default_ax_params = {
             "set_title": {"label": "PMF", "fontsize": 16},
             "set_xlabel": {"xlabel": "x", "fontsize": 12},
             "set_ylabel": {"ylabel": "pmf(x)", "fontsize": 12},
-            "set_xlim": {"left": low - 1, "right": high + 1},
-            "set_xticks": {"ticks": np.arange(low, high + 1, 1)},
+            "set_xlim": {"left": self.low - 1, "right": self.high + 1},
+            "set_xticks": {"ticks": np.arange(self.low, self.high + 1, 1)},
             "legend": {"loc": "best"},
         }
-        if self.custom_ax_params:  # custom dict is NOT empty
-            for ax_attr, ax_params in self.custom_ax_params.items():
-                self.default_ax_params.update({ax_attr: ax_params})
+        self._update_default_ax_params()
+        self.shuffle(self.color_index)
 
 
 @dataclass(frozen=False, init=True)
-class EmpiricalHistogramPlot(Plot):
+class EmpiricalHistogram(Plot):
     # center the bins on the states, for discrete distributions.
     bins: Optional[Union[List[float], np.ndarray]] = None
     size: int = 1000  # number of samples to draw from the distribution
 
     def __post_init__(self):
-        _low, high = self.states.min(), self.states.max()
-        self.bins = np.arange(0, high + 1.5) - 0.5 if self.bins is None else self.bins
+        self.bins = (
+            np.arange(0, self.high + 1.5) - 0.5 if self.bins is None else self.bins
+        )
 
         self.default_ax_params = {
             "set_title": {"label": "Empirical Histogram", "fontsize": 16},
@@ -67,14 +108,13 @@ class EmpiricalHistogramPlot(Plot):
             "set_xlim": {"left": min(self.bins), "right": max(self.bins)},
             "legend": {"loc": "best"},
         }
-        if self.custom_ax_params:  # custom dict is NOT empty
-            for ax_attr, ax_params in self.custom_ax_params.items():
-                self.default_ax_params.update({ax_attr: ax_params})
+        self._update_default_ax_params()
+        self.shuffle(self.color_index)
 
 
 def plot_discrete_empirical_histogram(
     distribution: Callable,
-    plot_params: EmpiricalHistogramPlot,
+    plot_params: EmpiricalHistogram,
     fig: Optional[plt.Figure] = None,
     ax: Optional[plt.Axes] = None,
     **hist_kwargs: Dict[str, Any],
@@ -113,7 +153,7 @@ def plot_discrete_empirical_histogram(
 
 def plot_discrete_pmf(
     distribution: Callable,
-    plot_params: PMFPlot,
+    plot_params: PMF,
     fig: Optional[plt.Figure] = None,
     ax: Optional[plt.Axes] = None,
     **stem_kwargs: Dict[str, Any],
@@ -123,7 +163,7 @@ def plot_discrete_pmf(
     Args:
         distribution (Callable): A function that takes in a state and returns the probability of that state.
             Typically called from a scipy.stats distribution object.
-        plot_params (PMFPlot): A dataclass that contains the default and custom parameters for the ax.
+        plot_params (PMF): A dataclass that contains the default and custom parameters for the ax.
         fig (Optional[plt.Figure]): The figure to plot on. Defaults to None.
         ax (Optional[plt.Axes]): The axes to plot on. Defaults to None.
         **stem_kwargs (Dict[str, Any]): Keyword arguments to pass to the stem.
@@ -197,7 +237,7 @@ def plot_bernoulli_pmf(
     X = stats.bernoulli(p)
     states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
 
-    plot_params = PMFPlot(
+    plot_params = PMF(
         states=states,
         custom_ax_params={
             "set_title": {"label": f"PMF of Bernoulli($p={p}$)", "fontsize": 16}
@@ -224,7 +264,7 @@ def plot_empirical_bernoulli(
     states = np.asarray([0, 1])  # Bernoulli only has two states, 0 and 1.
     bins = np.arange(0, states.max() + 1.5) - 0.5
 
-    plot_params = EmpiricalHistogramPlot(
+    plot_params = EmpiricalHistogram(
         states=states,
         bins=bins,
         size=size,
@@ -281,8 +321,8 @@ def plot_binomial_pmfs(
         states = np.arange(0, n + 1)
 
         xticks = np.arange(0, n + 1, 5)
-        color_index = COLOR_INDEXES.pop()
-        plot_params = PMFPlot(
+
+        plot_params = PMF(
             states=states,
             custom_ax_params={
                 "set_title": {
@@ -292,6 +332,8 @@ def plot_binomial_pmfs(
                 "set_xticks": {"ticks": xticks},
             },
         )
+
+        color_index = plot_params.color_index.pop()
         stem_kwargs = {
             "linefmt": f"C{color_index}-",
             "markerfmt": f"C{color_index}o",
@@ -320,7 +362,7 @@ def plot_empirical_binomial(
     states = np.arange(0, n + 1)  # Binomial has n + 1 states.
     bins = np.arange(0, states.max() + 1.5) - 0.5
 
-    plot_params = EmpiricalHistogramPlot(
+    plot_params = EmpiricalHistogram(
         states=states,
         bins=bins,
         size=size,
@@ -370,9 +412,8 @@ def plot_poisson_pmfs(
         )  # Poisson has infinite states, but we only plot up to 30.
 
         xticks = np.arange(0, 30, 5)
-        color_index = COLOR_INDEXES.pop()
 
-        plot_params = PMFPlot(
+        plot_params = PMF(
             states=states,
             custom_ax_params={
                 "set_title": {
@@ -382,7 +423,7 @@ def plot_poisson_pmfs(
                 "set_xticks": {"ticks": xticks},
             },
         )
-
+        color_index = plot_params.color_index.pop()
         stem_kwargs = {
             "linefmt": f"C{color_index}-",
             "markerfmt": f"C{color_index}o",
@@ -414,7 +455,7 @@ def plot_empirical_poisson(
 
         bins = np.arange(0, states.max() + 1.5) - 0.5
 
-        plot_params = EmpiricalHistogramPlot(
+        plot_params = EmpiricalHistogram(
             states=states,
             bins=bins,
             size=size,
@@ -452,9 +493,12 @@ def plot_empirical_poisson(
 
 
 def plot_geometric_pmfs(
-    ps: List[float], ax: Optional[plt.Axes] = None
+    ps: List[float],
+    fig: Optional[plt.Figure] = None,
+    ax: Optional[plt.Axes] = None,
 ) -> StemContainer:
     """Plot the PMFs of multiple Geometric distributions on the same axes."""
+    fig = fig or plt.gcf()
     ax = ax or plt.gca()
 
     for p in ps:
@@ -464,9 +508,18 @@ def plot_geometric_pmfs(
         )  # Geometric has infinite states, but we only plot up to 10.
 
         xticks = np.arange(0, 10, 1)
-        color_index = COLOR_INDEXES.pop()
 
-        ax_kwargs = {"title": f"PMF of Geometric($p={p}$)", "xticks": xticks}
+        plot_params = PMF(
+            states=states,
+            custom_ax_params={
+                "set_title": {
+                    "label": f"PMF of Geometric($p={p}$)",
+                    "fontsize": 16,
+                },
+                "set_xticks": {"ticks": xticks},
+            },
+        )
+        color_index = plot_params.color_index.pop()
         stem_kwargs = {
             "linefmt": f"C{color_index}-",
             "markerfmt": f"C{color_index}o",
@@ -474,9 +527,7 @@ def plot_geometric_pmfs(
             "label": f"PMF of Geometric($p={p}$)",
         }
 
-        stem = plot_discrete_pmf(
-            X, states=states, ax=ax, ax_kwargs=ax_kwargs, **stem_kwargs
-        )
+        stem = plot_discrete_pmf(X, plot_params=plot_params, fig=fig, **stem_kwargs)
     return stem
 
 
