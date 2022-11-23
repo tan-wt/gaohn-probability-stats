@@ -28,7 +28,7 @@ parts:
     - file: 03_discrete_random_variables/0304_cumulative_distribution_function.md
     - file: 03_discrete_random_variables/0305_expectation.md
     - file: 03_discrete_random_variables/0306_moments_and_variance.md
-    - file: 03_discrete_random_variables/0307_discrete_uniform_distribution.md
+    - file: 03_discrete_random_variables/0307_discrete_uniform_distribution_concept.md
       sections:
       - file: 03_discrete_random_variables/0307_discrete_uniform_distribution_implementation.ipynb    
     - file: 03_discrete_random_variables/0308_bernoulli_distribution_concept.md
@@ -43,7 +43,7 @@ parts:
     - file: 03_discrete_random_variables/0311_poisson_distribution_concept.md
       sections:
       - file: 03_discrete_random_variables/0311_poisson_distribution_implementation.ipynb
-    # - file: 03_discrete_random_variables/summary.md
+    - file: 03_discrete_random_variables/summary.md
     - file: 03_discrete_random_variables/exercises.md
 
   - caption: Chapter 4. Continuous Random Variables
