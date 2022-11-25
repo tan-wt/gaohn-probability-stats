@@ -596,27 +596,30 @@ def plot_sum_of_uniform_distribution() -> None:
     Z100 = sum(list_of_rvs)  # X1 + X2 + ... + X100
     states_z100 = np.arange(100, 600 + 1)  # [100, 600] since it is sum of 100 variables
     bins_z100 = states_z100 - 0.5  # center the bins
-    plot_empirical_hist_distribution(
-        Z1, bins=bins_z1, ax=axes[0, 0], title="Distribution of $Z = X$"
+
+    axes[0, 0].set_title(label="Distribution of $Z = X$")
+    hist_z1 = sns.histplot(
+        Z1,
+        bins=bins_z1,
+        ax=axes[0, 0],
+        stat="probability",
     )
-    plot_empirical_hist_distribution(
-        Z2, bins=bins_z2, ax=axes[0, 1], title="Distribution of $Z = X1 + X2$"
+    axes[0, 1].set_title(label="Distribution of $Z = X_1 + X_2$")
+    hist_z2 = sns.histplot(
+        Z2,
+        bins=bins_z2,
+        ax=axes[0, 1],
+        stat="probability",
     )
-    plot_empirical_hist_distribution(
-        Z6,
-        bins=bins_z6,
-        ax=axes[1, 0],
-        title="Distribution of $Z = X1 + X2 + X3 + X4 + X5 + X6$",
+
+    axes[1, 0].set_title(
+        label="Distribution of $Z = X_1 + X_2 + X_3 + X_4 + X_5 + X_6$"
     )
-    plot_empirical_hist_distribution(
-        Z100,
-        bins=bins_z100,
-        linewidth=0.01,
-        xlim=(100, 600),
-        xticks=np.arange(100, 600 + 1, 50),
-        ax=axes[1, 1],
-        title="Distribution of $Z = X1 + X2 + \ldots + X100$",
-    )
+    hist_z6 = sns.histplot(Z6, bins=bins_z6, ax=axes[1, 0], stat="probability")
+
+    axes[1, 1].set_title(label="Distribution of $Z = X_1 + X_2 + ... + X_{100}$")
+    hist_z100 = sns.histplot(Z100, bins=bins_z100, ax=axes[1, 1], stat="probability")
+
     plt.show()
 
 
@@ -627,32 +630,8 @@ if __name__ == "__main__":
     plot_discrete_uniform_pmf(low, high, fig=fig, ax=axes[0])
     plot_empirical_discrete_uniform(low, high, fig=fig, ax=axes[1])
     plt.show()
-    # _fig, ax = plt.subplots(1, figsize=(8, 6))
-    # plot_discrete_uniform_pmf(a=1, b=6, ax=ax)
-    # low, high = 1, 6 + 1  # [1, 6] for dice roll
-    # X = stats.randint(low, high)
-    # Z1 = X.rvs(size=10000)
-    # states_z1 = np.arange(low, high + 1)
 
-    # plot_discrete_empirical_histogram(
-    #     X,
-    #     states=states_z1,
-    # )
-    # plt.show()
-
-    # _fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-    # plot_discrete_uniform_pmf(a=1, b=6, ax=axes[0])
-    # low, high = 1, 6 + 1  # [1, 6] for dice roll
-    # X = stats.randint(low, high)
-    # Z1 = X.rvs(size=10000)
-    # states_z1 = np.arange(low, high + 1)
-
-    # plot_discrete_empirical_histogram(
-    #     Z1,
-    #     states=states_z1,
-    #     ax=axes[1],
-    # )
-    # plt.show()
+    plot_sum_of_uniform_distribution()
 
     # Bernoulli PMF
     # fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.8), sharey=True, dpi=100)
