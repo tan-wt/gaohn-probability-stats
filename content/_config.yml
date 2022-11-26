@@ -67,6 +67,8 @@ sphinx:
           "defeq": "\\overset{\\text{def}}{=}"
           "defa": "\\overset{\\text{(a)}}{=}"
           "defb": "\\overset{\\text{(b)}}{=}"
+          "defc": "\\overset{\\text{(c)}}{=}"
+          "defd": "\\overset{\\text{(d)}}{=}"
           "st": "\\mid"
           "mod": "\\mid"
           "S": "\\Omega"

@@ -60,6 +60,7 @@ parts:
     - file: 04_continuous_random_variables/0409_gaussian_distribution.md
     - file: 04_continuous_random_variables/0410_skewness_and_kurtosis.md
     - file: 04_continuous_random_variables/0411_convolve_and_sum_of_random_variables.md
+    - file: 04_continuous_random_variables/0412_functions_of_random_variables.md
 
   - caption: Chapter 5. Joint Distributions
     chapters:
