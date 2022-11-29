@@ -4,7 +4,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
-
+from matplotlib_inline import backend_inline
 
 # plt.rcParams["figure.dpi"] = 600
 # plt.rcParams["savefig.dpi"] = 600
@@ -83,6 +83,12 @@ def true_pmf(x: float, population: np.ndarray) -> float:
 def empirical_pmf(x: float, sample: np.ndarray):
     """Empirical distribution of the sample."""
     return np.sum(sample == x) / len(sample)
+
+
+def use_svg_display():
+    """Use the svg format to display a plot in Jupyter.
+    Defined in :numref:`sec_calculus`"""
+    backend_inline.set_matplotlib_formats("svg")
 
 
 if __name__ == "__main__":
