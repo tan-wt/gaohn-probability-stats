@@ -92,6 +92,7 @@ sphinx:
           "B": "\\mathbf{B}"
           "C": "\\mathbf{C}"
           "E": "\\mathcal{F}"
+          "eventA": "\\mathcal{A}"
           "lset": "\\left\\{"
           "rset": "\\right\\}"
           "lsq": "\\left["
@@ -104,6 +105,8 @@ sphinx:
           "pdf": "f_X"
           "pdftwo": "f_{X,Y}"
           "pdfjoint": "f_{\\mathbf{X}}"
+          "pmfjointxy": "p_{X, Y}"
+          "pdfjointxy": "f_{X, Y}"
           "cdf": "F_X"
           "pspace": "(\\Omega, \\mathcal{F}, \\mathbb{P})"
           "var": "\\operatorname{Var}"
@@ -118,4 +121,5 @@ sphinx:
           "gaussiansymbol": "\\mathcal{N}"
           "exponential": "\\operatorname{Exponential}"
           "iid": "\\textbf{i.i.d.}"
+          "and": "\\text{and}"
 
